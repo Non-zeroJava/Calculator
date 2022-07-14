@@ -38,9 +38,7 @@ public class Util {
         }
     }
 
-    /*
-     * Метод проверяющий
-     */
+  
     public void zeroExam(String resultRoman) {
         if (String.valueOf(0).equals(resultRoman)) {
             throw new RuntimeException();
