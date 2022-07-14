@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.InputMismatchException;
-import java.util.Objects;
 import java.util.Scanner;
 
 import static org.example.Roman.convertNumToRoman;
@@ -12,13 +10,20 @@ public class Calculator {
     static int number1, number2;
     static char operation;
     static int result;
-
+    static Util util = new Util();
 
     public static void main(String[] args) {
         String userInput = scanner.nextLine();
 
-        Util util = new Util();
+        calc(userInput);
+
+
+    }
+
+    public static void calc(String userInput) {
+
         util.countCharacters(userInput);
+
 
 
         char[] numbers = new char[10];
@@ -58,13 +63,14 @@ public class Calculator {
                 int b = 10;
 
                 if (number1 >= a && number1 <= b && number2 >= a && number2 <= b) {
-                    result = calculated(number1, number2, operation);
+
+                    result = Util.calculated(number1, number2, operation);
                     System.out.println(number1 + " " + operation + " " + number2 + " = " + result);
                     System.exit(1);
 
                 } else {
-                    System.out.println("throws Exception ");
-                    System.exit(1);
+
+                    throw new RuntimeException();
                 }
 
             } else {
@@ -76,53 +82,27 @@ public class Calculator {
 
                 } else {
 
-                    result = calculated(number1, number2, operation);
+                    result = Util.calculated(number1, number2, operation);
 
                     String resultRoman = convertNumToRoman(result);
+                    util.zeroExam(resultRoman);
+
+
                     System.out.println(chislo01.toUpperCase() + " " + operation + " " + chislo02.toUpperCase() + " = " + resultRoman.toUpperCase());
+
                     System.exit(1);
+
                 }
 
             }
+
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException ae) {
-            System.out.println("throws Exception ");
+            throw new RuntimeException();
         }
-
-
     }
 
 
-    public static int calculated(int num1, int num2, char op) {
 
-        int result = 0;
-        switch (op) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                try {
-                    result = num1 / num2;
-                } catch (ArithmeticException | InputMismatchException e) {
-                    System.out.println("throws Exception ");
-                    System.exit(1);
-
-                    break;
-
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("throws Exception ");
-        }
-        return result;
-
-
-    }
 
 
 }

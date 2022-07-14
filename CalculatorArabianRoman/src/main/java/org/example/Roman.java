@@ -40,12 +40,11 @@ public class Roman {
                 case "X":
                     return 10;
                 default:
-                    System.out.println("throws Exception");
-                    System.exit(1);
+                    throw new RuntimeException();
+
             }
         } catch (InputMismatchException e) {
             throw new InputMismatchException("throws Exception");
         }
-        return -1;
     }
 }
